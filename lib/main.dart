@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.all(10),
           child: FormScreen(),
-        ),
+        ), 
       ),
     );
   }
