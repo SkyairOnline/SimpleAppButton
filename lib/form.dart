@@ -6,18 +6,14 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-  int _flag = 0;
+  int _index = 1;
 
-  void _flagHideAndSeek() {
-    if (_flag == 0) {
-      setState(() {
-        _flag = 1;
-      });
-    } else {
-      setState(() {
-        _flag = 0;
-      });
-    }
+  Widget _textField() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Name',
+      ),
+    );
   }
 
   @override
@@ -25,13 +21,19 @@ class _FormScreenState extends State<FormScreen> {
     return Form(
       child: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Name',
-            ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: _index,
+            itemBuilder: (context, index) {
+              return _textField();
+            },
           ),
           RaisedButton(
-            onPressed: _flagHideAndSeek,
+            onPressed: () {
+              setState(() {
+                _index++;
+              });
+            },
             color: Theme.of(context).primaryColor,
             child: Text(
               'Add',
@@ -39,16 +41,6 @@ class _FormScreenState extends State<FormScreen> {
                 color: Colors.white,
               ),
             ),
-          ),
-          Container(
-            child: _flag == 1
-                ? TextFormField(
-                    enabled: _flag == 1,
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                    ),
-                  )
-                : null,
           ),
         ],
       ),
